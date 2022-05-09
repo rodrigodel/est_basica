@@ -8,5 +8,5 @@ As resuloções serão em R
 
 ![capa_livro](https://user-images.githubusercontent.com/24477605/167425693-f3d47372-b3c9-42ed-bfe5-831d39d4d6cc.jpg)
 
-Link para compra na Amazon: https://www.amazon.com.br/Estat%C3%ADstica-B%C3%A1sica-Wilton-Bussab/dp/8547220224/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2BTTU8ON2CL08&keywords=estatistica+basica&qid=1652103955&sprefix=estatistica+basica+%2Caps%2C707&sr=8-1&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d
+<a href="https://amzn.to/3vWGs60" target="_blank">Link para compra na Amazon</a>: 
 
