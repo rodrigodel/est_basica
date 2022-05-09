@@ -18,5 +18,5 @@ O livro é muito didático e com uma escrita que a grande maioria das pessoas qu
 
 Eu li todo o livro e fiz os exercícios. Vou publicar aos poucos os cógigos em R, pois preciso antes de mais nada organizá-los.
 
-Este é um livro referência para os cursos de estatística, um livro básico que todos deveriam ler e pratica.
+Este é um livro referência para os cursos de estatística, um livro básico que todos deveriam ler e praticar.
 
