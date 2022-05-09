@@ -1,3 +1,5 @@
+![Badge em Desenvolvimento](https://img.shields.io/badge/Livro-Estat%C3%ADstica%20B%C3%A1sica-green)
+
 ### Livro Estatística Básica
 Exerícios / Problemas do livro Estatística Básica 9ª Edição
 Wilton de O. Bussab e Pedro A. Morettin
