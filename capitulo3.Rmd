@@ -1,0 +1,180 @@
+---
+title: 'Livro: Estatística Básica'
+author: "Rodrigo Zambon"
+date: '2022-05-09'
+output: html_document
+---
+
+```{r Carregando Pacotes e Dados, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+# Carregando os dados do Livro
+
+# Instalando Pacotes necessários do Livro
+if(!require(pacman)) install.packages("pacman")
+library(pacman)
+
+pacman::p_load(knitr, skimr, forcats, kableExtra, dplyr, ggplot2, scales)
+
+print('Done Importing Library')
+```
+
+
+## Capítulo 3
+
+#### 1. Quer se estudar o número de erros de impressão de um livro. Para isso escolheu-se uma amostra de 50 páginas, encontrando-se o número de erros por página da tabela abaixo. (a) Qual o número médio de erros por página?
+
+| Erros | Frequência |   
+| --- | :---: |
+| 0 | 25 |
+| 1 | 20 |
+| 2 | 3 |
+| 3 | 1 |
+| 4 | 1 |
+
+(a) Qual o número médio de erros por página?
+```{r}
+# Montar o dataset
+
+erros <- c(0, 1, 2, 3, 4)
+freq <- c(25, 20, 3, 1, 1)
+
+ds <- data.frame(erros,freq)
+ds
+
+# Calcular Média
+
+mediaErros <- sum(ds$erros*ds$freq)/sum(ds$freq)
+mediaErros
+
+```
+
+(b) E o número mediano?
+
+```{r}
+# Mediana - Posição central
+
+# Acrescenta Frequência Relativa e Acumulada
+
+ds <- transform(ds, freqAcumulada = cumsum(freq), freqRelativa = prop.table(freq))
+ds
+
+mediana <- median(rep(ds$erros, ds$freq))
+mediana
+```
+
+(c)	Qual é o desvio padrão?
+
+```{r}
+# Desvio Padrão
+
+dp <- round(sd(rep(ds$erros, ds$freq)),4)
+dp
+```
+
+(d)	Faça uma representação gráfica para a distribuição.
+
+```{r}
+
+```
+
+(e)	Se o livro tem 500 páginas, qual é o número total de erros esperado no livro?
+
+```{r}
+# Vamos Multiplicar o Erro médio por página pela quantidade total de pagina
+numPaginasLivro <- 500
+totalErros <- mediaErros * numPaginasLivro
+totalErros
+```
+#### 2. As taxas de juros recebidas por 10 ações durante um certo período foram (medidas em porcentagem) 2,59; 2,64; 2,60; 2,62; 2,57; 2,55; 2,61; 2,50; 2,63; 2,64. Calcule a média, a mediana e o desvio padrão.
+
+```{r}
+# Vamos criar o vetor
+
+taxas <- c(2.59, 2.64, 2.60, 2.62, 2.57, 2.55, 2.61, 2.50, 2.63, 2.64)
+
+# Cálculo da Média
+
+mediaTaxas <- round(mean(taxas),2)
+mediaTaxas
+
+# Calculo da Mediana
+
+medianaTaxas <- round(median(taxas),2)
+medianaTaxas
+
+# Calculo do Desvio Padrão
+
+sdTaxas <- round(sd(taxas),2)
+sdTaxas
+
+```
+
+#### 3. Para facilitar um projeto de ampliação da rede de esgoto de uma certa região de uma cidade, as autoridades tomaram uma amostra de tamanho 50 dos 270 quarteirões que compõem a região, e foram encontrados os seguintes números de casas por quarteirão:
+
+|   |   |   |   |   |   |   |   |   |   |
+|---|---|---|---|---|---|---|---|---|---|
+| 2 | 2 | 3 | 10 | 13 | 14 | 15 | 15 | 16 | 16 |
+| 18 | 18 | 20 | 21 | 22 | 22 | 23 | 24 | 25 | 26 |
+| 26 | 27 | 29 | 29 | 30 | 32 | 36 | 42 | 44 | 45 |
+| 45 | 46 | 48 | 52 | 58 | 59 | 61 | 61 | 61 | 65 |
+| 66 | 66 | 68 | 75 | 78 | 80 | 89 | 90 | 92 | 97 |
+
+(a) Use cinco intervalos e construa um histograma.
+
+```{r}
+# Vamos Criar um Vetor
+
+casas <- data.frame(c(2, 2, 3, 10, 13, 14, 15, 15, 16, 16,18, 18, 20, 21, 22, 22, 23, 24, 25, 26, 26, 27, 29, 29, 30, 32, 36, 42, 44, 45, 45, 46, 48, 52, 58, 59, 61, 61, 61, 65, 66, 66, 68, 75, 78, 80, 89, 90, 92, 97))
+
+names(casas) <- 'casas'
+
+
+dadosCasa <- data.frame(
+  x = c(round(min(casas$casas), 2), round(mean(casas$casas), 2), round(median(casas$casas), 2), round(max(casas$casas), 2)),
+  y = c(2, 15, 14, 5),
+  label = c("Mínimo:", "Média:", "Mediana: ", "Máximo:")
+) 
+
+# Construindo o Grafico
+
+
+ggplot(casas, aes(x = casas)) +
+  geom_histogram(color = "white", fill = "lightblue", breaks=c(0,20,40,60,80,100)) +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(from = 0,to = 100,by = 20), limits = c(0,100)) +
+  xlab("Número de Casas") + 
+  ylab("Frequência") +
+  geom_text(data = dadosCasa, aes(x = x, y = y, label = paste(label, x)), size = 3, fontface = "bold") +
+  stat_bin(geom="text", aes(label=..count..), vjust=-1.5, breaks=c(0,20,40,60,80,100)) 
+
+```
+
+
+(b) Determine uma medida de posição central e uma medida de dispersão.
+
+```{r}
+# Medidas de Posição Central
+# print(paste0("Current working dir: ", wd))
+
+# Média
+
+media <- mean(casas$casas)
+cat("O valor de média é:", media)
+
+
+# Medidas de Dispersão
+
+desvioPadrao <- sd(casas$casas)
+cat("O Desvio Padrão:", desvioPadrao)
+
+```
+
+
+#### 4
+
+(a) Dê uma situação prática em que você acha que a mediana é uma medida mais apropriada do que a média.
+
+(b)	Esboce um histograma em que a média e a mediana coincidem. Existe alguma classe de histogramas em que isso sempre acontece?
+
+(c)	Esboce os histogramas de três variáveis [X, YeZ} com a mesma média aritmética, mas com as variâncias ordenadas em ordem crescente.
+
+
